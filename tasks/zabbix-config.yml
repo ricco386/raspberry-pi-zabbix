@@ -1,0 +1,66 @@
+---
+- name: Set "Server" in zabbix-agent config
+  lineinfile:
+    dest: "{{ zabbix_agent_config }}"
+    regexp: "^Server="
+    insertafter: "^# Server="
+    line: "Server={{ zabbix_server_ip }}"
+  become: true
+  become_user: root
+  notify: "restart zabbix-agent"
+  tags:
+    - configure
+    - zabbix-agent
+
+- name: Set "ServerActive" in zabbix-agent config
+  lineinfile:
+    dest: "{{ zabbix_agent_config }}"
+    regexp: "^ServerActive="
+    insertafter: "^# ServerActive="
+    line: "ServerActive={{ zabbix_server_ip }}"
+  become: true
+  become_user: root
+  notify: "restart zabbix-agent"
+  tags:
+    - configure
+    - zabbix-agent
+
+- name: Set "Hostname" in zabbix-agent config
+  lineinfile:
+    dest: "{{ zabbix_agent_config }}"
+    regexp: "^Hostname="
+    insertafter: "^# Hostname="
+    line: "Hostname={{ zabbix_agent_hostname }}"
+  become: true
+  become_user: root
+  notify: "restart zabbix-agent"
+  tags:
+    - configure
+    - zabbix-agent
+
+- name: Set "Timeout" in zabbix-agent config
+  lineinfile:
+    dest: "{{ zabbix_agent_config }}"
+    regexp: "^Timeout="
+    insertafter: '^# Timeout='
+    line: "Timeout={{ zabbix_agent_timeout }}"
+  become: true
+  become_user: root
+  notify: "restart zabbix-agent"
+  tags:
+    - configure
+    - zabbix-agent
+
+- name: Set "UserParamater" in zabbix-agent config
+  lineinfile:
+    dest: "{{ zabbix_agent_config }}"
+    regexp: "^UserParameter={{ item.name }}"
+    # insertafter: '^# UserParameter='
+    line: 'UserParameter={{ item.name }},{{ item.command }}'
+  with_items: "{{ zabbix_item_userparameters }}"
+  become: true
+  become_user: root
+  notify: "restart zabbix-agent"
+  tags:
+    - configure
+    - zabbix-agent

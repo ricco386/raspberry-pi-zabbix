@@ -1,0 +1,36 @@
+---
+# Script deployment path
+rpi_monitor_script: /usr/local/sbin/raspi-monitor.sh
+
+# The name of the service to be restarted
+zabbix_agent_service: zabbix-agent
+
+# Name of the Zabbix Agent package in repository 
+zabbix_agent_package: zabbix-agent
+
+# Where is Zabbix Agent config is located at
+zabbix_agent_config: /etc/zabbix/zabbix_agentd.conf
+
+# Hostname of the server where Zabbix Agent is running (configured in Zabbix Server)
+zabbix_agent_hostname: "{{ inventory_hostname }}"
+
+# Number of second Zabbix Agent should timeout Active checks scripts
+zabbix_agent_timeout: 10
+
+# UserParameters to be checked by Zabbix Agent
+zabbix_agent_userparameters:
+  - {name: "rpi.boardversion", command: "sudo {{ rpi_monitor_script }} boardversion"}
+  - {name: "rpi.boardrevision", command: "sudo {{ rpi_monitor_script }} boardrevision"}
+  - {name: "rpi.boardserialnumber", command: "sudo {{ rpi_monitor_script }} boardserialnumber"}
+  - {name: "rpi.firmwareversion", command: "sudo {{ rpi_monitor_script }} firmwareversion"}
+  - {name: "rpi.cpuvoltage", command: "sudo {{ rpi_monitor_script }} cpuvoltage"}
+  - {name: "rpi.cpuclock", command: "sudo {{ rpi_monitor_script }} cpuclock"}
+  - {name: "rpi.cpumem", command: "sudo {{ rpi_monitor_script }} cpumem"}
+  - {name: "rpi.cputemp", command: "sudo {{ rpi_monitor_script }} cputemp"}
+  - {name: "rpi.gpumem", command: "sudo {{ rpi_monitor_script }} gpumem"}
+
+# IP address of the Zabbix Server
+zabbix_server_ip: 127.0.0.1
+
+# scripts that will be zabbix user able to start without password as root
+zabbix_user_sudoers_scripts: "{{ rpi_monitor_script }}"

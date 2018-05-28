@@ -1,0 +1,23 @@
+---
+- name: Set up Raspberry Pi monitoring script
+  copy: "src=raspi-monitor.sh dest={{ rpi_monitor_script }} owner=root group=root mode=0755"
+  become: true
+  become_user: root
+  tags: monitoring-script
+
+- name: Install latest version of "zabbix-agent"
+  apt:
+    name: "{{ zabbix_agent_package }}"
+    state: latest
+  when: ansible_pkg_mgr == "apt"
+  become: true
+  become_user: root
+  register: install_zabbix_agent
+  async: 3600
+  poll: 3
+  tags:
+    - install
+    - zabbix-agent
+
+- import_tasks: zabbix-config.yml
+- import_tasks: sudoers.yml
