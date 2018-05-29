@@ -1,17 +1,16 @@
 ---
-
 galaxy_info:
   author: Richard Kellner
-  description: Ansible role for installing Zabbix agent and configuring to monitor Raspberry Pi specific parameters. Role will install raspi-monitor.sh script that can monitor: board version, board revision, board serialnumber, firmware version, cpu voltage, cpu clock, cpu memmory, cpu temperature, gpu memmory 
+  description: Ansible role for installing Zabbix agent and configuring to monitor Raspberry Pi specific parameters. Role will install raspi-monitor.sh script that can monitor several board parameters.
   license: MIT
   min_ansible_version: 2.0
   platforms:
   - name: Debian
     versions:
     - stretch
-  galaxy_tags:
-    - monitoring
+  categories:
+    - monitorign
     - system
+  galaxy_tags:
     - zabbix
     - raspberrypi
-    - raspbian
