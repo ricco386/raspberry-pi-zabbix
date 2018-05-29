@@ -57,7 +57,7 @@
     regexp: "^UserParameter={{ item.name }}"
     # insertafter: '^# UserParameter='
     line: 'UserParameter={{ item.name }},{{ item.command }}'
-  with_items: "{{ zabbix_item_userparameters }}"
+  with_items: "{{ zabbix_agent_userparameters }}"
   become: true
   become_user: root
   notify: "restart zabbix-agent"

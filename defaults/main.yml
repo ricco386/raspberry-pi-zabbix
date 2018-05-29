@@ -15,7 +15,7 @@ zabbix_agent_config: /etc/zabbix/zabbix_agentd.conf
 zabbix_agent_hostname: "{{ inventory_hostname }}"
 
 # Number of second Zabbix Agent should timeout Active checks scripts
-zabbix_agent_timeout: 10
+zabbix_agent_timeout: 3
 
 # UserParameters to be checked by Zabbix Agent
 zabbix_agent_userparameters:
