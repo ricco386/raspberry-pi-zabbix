@@ -8,9 +8,8 @@ galaxy_info:
   - name: Debian
     versions:
     - stretch
-  categories:
-    - monitorign
-    - system
   galaxy_tags:
+    - monitoring
+    - system
     - zabbix
     - raspberrypi
